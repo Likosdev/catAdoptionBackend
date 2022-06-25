@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  mongo:
+    ports:
+      - '27017:27017'
+    volumes:
+      - './mongoinit.js:/docker-entrypoint-initdb.d/mongo-init.js:ro'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=nest
+    container_name: catadoption_mongodb
+    network_mode: bridge
+    image: mongo:latest
