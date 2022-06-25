@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MiddlewareConsumer } from '@nestjs/common';
 import { AppLoggerMiddleware } from './middleware/loggerMiddleware';
+import { HealthModule } from './health/health.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -30,6 +31,7 @@ import { AppLoggerMiddleware } from './middleware/loggerMiddleware';
         };
       },
     }),
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
