@@ -8,7 +8,7 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=nest
+      - MONGO_INITDB_DATABASE=catadoption
     container_name: catadoption_mongodb
     network_mode: bridge
     image: mongo:latest
