@@ -23,16 +23,48 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+catAdoptionBackend is a learning Project for the 
+[Nest](https://github.com/nestjs/nest) framework.
 
 ## Installation
 
 ```bash
 $ npm install
 ```
+## Prerequisites
+
+Before starting you need to provide a .env file like this:
+```
+NODE_ENV=<development|production|test|staging>
+PORT=3033
+MONGODB_USER=catadoptionAdmin
+MONGODB_PASSWORD=password
+MONGODB_DBNAME=nest
+MONGODB_HOST=localhost
+JWT_SECRET=nestjs-secret-key
+```
+
+This repository provides a docker-compose file to easily start a mongodb container with authentication enabled. To make sure everything works, some variables set by the .env file need to match values in mongoinit.js or vice versa.
+
+```js
+db.createUser({
+  user: 'catadoptionAdmin', // must be equal to MONGODB_USER
+  pwd: 'password', // must be equal to MONGODB_PASSWORD
+  roles: [
+    {
+      role: 'readWrite',
+      db: 'catadoption', // must be equal to MONGODB_DBNAME
+    },
+  ],
+});
+
+```
+
+With docker and docker-compose installed, execute `docker-compose up -d` before the following steps
+
 
 ## Running the app
+
 
 ```bash
 # development
@@ -44,20 +76,6 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
