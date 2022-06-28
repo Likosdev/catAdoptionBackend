@@ -25,7 +25,6 @@ import { AuthModule } from './auth/auth.module';
         const MONGODB_DBNAME = configService.get<string>('MONGODB_DBNAME');
         const MONGODB_PORT = configService.get<string>('MONGODB_PORT');
         const MONGODB_URI = `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DBNAME}?authMechanism=DEFAULT`;
-        console.log(MONGODB_URI);
 
         return {
           uri: MONGODB_URI,
