@@ -9,6 +9,8 @@ import { AppLoggerMiddleware } from './middleware/loggerMiddleware';
 import { HealthModule } from './health/health.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { CatsModule } from './cats/cats.module';
+import { SheltersModule } from './shelters/shelters.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -35,6 +37,8 @@ import { AuthModule } from './auth/auth.module';
     HealthModule,
     UsersModule,
     AuthModule,
+    CatsModule,
+    SheltersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
