@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateShelterDto } from './dto/create-shelter.dto';
 import { UpdateShelterDto } from './dto/update-shelter.dto';
+import { Shelter } from './schemas/shelter.schema';
 
 @Injectable()
 export class SheltersService {
-  create(createShelterDto: CreateShelterDto) {
-    return 'This action adds a new shelter';
+  constructor(
+    @InjectModel(Shelter.name) private shelterModel: Model<Shelter>,
+  ) {}
+
+  async create(createShelterDto: CreateShelterDto) {
+    return await this.shelterModel.create(createShelterDto);
   }
 
-  findAll() {
-    return `This action returns all shelters`;
+  async findAll() {
+    return await this.shelterModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} shelter`;
+  async findOne(id: string) {
+    return await this.shelterModel.findById(id).exec();
   }
 
-  update(id: number, updateShelterDto: UpdateShelterDto) {
-    return `This action updates a #${id} shelter`;
+  async update(id: string, updateShelterDto: UpdateShelterDto) {
+    return await this.shelterModel.findByIdAndUpdate(id, updateShelterDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} shelter`;
+  async remove(id: string) {
+    return this.shelterModel.remove({ _id: id }).exec();
   }
 }

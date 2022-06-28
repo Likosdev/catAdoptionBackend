@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { object } from 'joi';
 
 export type ShelterDocument = Shelter & Document;
 
@@ -7,7 +8,7 @@ export class Shelter {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({ type: object })
   address: {
     street: string;
     zip: number;
