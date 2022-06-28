@@ -1,5 +1,34 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsObject, IsString } from 'class-validator';
+import { isNotEmpty, IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator';
+
+
+export class ShelterAdressDto {
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  street: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty()
+  zip: number;
+}
+
+export class ShelterContactDto
+{
+  @ApiProperty()
+  @IsString()
+  phone: string;
+  
+  @ApiProperty()
+  @IsString()
+  mobile: string;
+  
+  @ApiProperty()
+  @IsString()
+  email: string;
+}
+
 
 export class CreateShelterDto {
   @IsString()
@@ -10,16 +39,11 @@ export class CreateShelterDto {
   @IsObject()
   @IsNotEmpty()
   @ApiProperty()
-  address: {
-    street: string;
-    zip: number;
-  };
+  address: ShelterAdressDto
 
   @IsObject()
   @ApiProperty()
-  contact: {
-    phone: string;
-    mobile: string;
-    email: string;
-  };
+  contact: ShelterContactDto
+
 }
+
