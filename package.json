@@ -33,9 +33,9 @@
     "@nestjs/swagger": "^5.2.1",
     "@nestjs/terminus": "^8.0.8",
     "@types/bcrypt": "^5.0.0",
+    "D": "^1.0.0",
     "bcrypt": "^5.0.1",
     "class-validator": "^0.13.2",
-    "D": "^1.0.0",
     "joi": "^17.6.0",
     "mongoose": "^6.4.0",
     "passport": "^0.6.0",
@@ -44,7 +44,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "swagger-ui-express": "^4.4.0"
+    "swagger-ui-express": "^4.4.0",
+    "webpack": "^5.73.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
