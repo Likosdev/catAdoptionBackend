@@ -14,7 +14,9 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
+  
   @Post()
+  @UseGuards(JwtAuthGuard)
   async addUser(@Body() body: addUserDto) {
     return this.userService.createUser(body);
   }

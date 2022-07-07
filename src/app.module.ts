@@ -1,16 +1,15 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { validationSchema } from 'env.validationSchema';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
-import { MiddlewareConsumer } from '@nestjs/common';
-import { AppLoggerMiddleware } from './middleware/loggerMiddleware';
-import { HealthModule } from './health/health.module';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CatsModule } from './cats/cats.module';
+import { HealthModule } from './health/health.module';
+import { AppLoggerMiddleware } from './middleware/loggerMiddleware';
 import { SheltersModule } from './shelters/shelters.module';
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot({

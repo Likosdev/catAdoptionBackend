@@ -1,16 +1,35 @@
-import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpStatus, Injectable, OnModuleInit } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
+import { Role } from './role.enum';
+import { Roles } from './roles.decorator';
 import { User } from './schema/user.schema';
 import { addUserDto } from './users.dto';
 
 @Injectable()
-export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+export class UsersService implements OnModuleInit {
+  constructor(@InjectModel(User.name) private userModel: Model<User>, private configSercive: ConfigService) { }
+  
+  async onModuleInit() {
+    try {
+      const createdUser = await this.createUser({ 
+        name: "admin", 
+        password: this.configSercive.get<string>('ADMIN_USER_PASSWORT'),
+        roles: [Role.Admin, Role.User]  
+      })
+      console.log('admin user successfully created')
+      console.log(createdUser);
+        
+    } catch (error) {
+      console.log(`Could not create admin user because: ${error}`)
+    }
+    
+  }
 
   async getUsers() {
-    return await this.userModel.find().select('name').exec();
+    return await this.userModel.find().select(['name','roles']).exec();
   }
 
   async deleteUser(userId: string) {
@@ -29,7 +48,7 @@ export class UsersService {
     }
 
     const existingUser = await this.findUserByName(usersDto.name);
-
+    console.log("found existing user: ", existingUser);
     if (existingUser) {
       throw new BadRequestException(
         HttpStatus.BAD_REQUEST,
@@ -44,6 +63,8 @@ export class UsersService {
     return {
       message: 'user created',
       username: newUser.name,
+      id: newUser._id,
+      roles: newUser.roles
     };
   }
 }

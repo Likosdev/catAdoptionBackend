@@ -6,7 +6,7 @@ services:
     volumes:
       - './mongoinit.js:/docker-entrypoint-initdb.d/mongo-init.js:ro'
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_USERNAME=catadoptionAdmin
       - MONGO_INITDB_ROOT_PASSWORD=password
       - MONGO_INITDB_DATABASE=catadoption
     container_name: catadoption_mongodb
