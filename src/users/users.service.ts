@@ -28,6 +28,10 @@ export class UsersService implements OnModuleInit {
     
   }
 
+  async findUserById(user_id: string) {
+    return await this.userModel.findById(user_id).exec()
+  }
+
   async getUsers() {
     return await this.userModel.find().select(['name','roles']).exec();
   }

@@ -8,6 +8,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Role } from './role.enum';
+import { Roles } from './roles.decorator';
 import { addUserDto } from './users.dto';
 import { UsersService } from './users.service';
 
@@ -29,6 +31,7 @@ export class UsersController {
 
   @Delete('/:userId')
   @UseGuards(JwtAuthGuard)
+  @Roles(Role.Admin)
   async deleteUser(@Param('userId') userId: string) {
     return this.userService.deleteUser(userId);
   }
