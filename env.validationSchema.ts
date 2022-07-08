@@ -11,5 +11,6 @@ export const validationSchema = joi.object({
   MONGODB_USER: joi.string().default('nestAdmin'),
   MONGODB_PORT: joi.number().default(27017),
   ADMIN_USER_PASSWORT: joi.string().default('password'),
+  ADMIN_USER_EMAIL: joi.string().required(),
   JWT_SECRET: joi.string().required(),
 });

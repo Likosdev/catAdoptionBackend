@@ -9,6 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Role } from 'src/users/role.enum';
+import { Roles } from 'src/users/roles.decorator';
 import { CreateShelterDto } from './dto/create-shelter.dto';
 import { UpdateShelterDto } from './dto/update-shelter.dto';
 import { SheltersService } from './shelters.service';
@@ -18,6 +20,7 @@ export class SheltersController {
   constructor(private readonly sheltersService: SheltersService) {}
 
   @UseGuards(JwtAuthGuard)
+  @Roles(Role.User)
   @Post()
   create(@Body() createShelterDto: CreateShelterDto) {
     return this.sheltersService.create(createShelterDto);
@@ -35,12 +38,14 @@ export class SheltersController {
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
+  @Roles(Role.User)
   update(@Param('id') id: string, @Body() updateShelterDto: UpdateShelterDto) {
     return this.sheltersService.update(id, updateShelterDto);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
+  @Roles(Role.User)
   remove(@Param('id') id: string) {
     return this.sheltersService.remove(id);
   }

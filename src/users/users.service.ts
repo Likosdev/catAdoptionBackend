@@ -17,7 +17,9 @@ export class UsersService implements OnModuleInit {
       const createdUser = await this.createUser({ 
         name: "admin", 
         password: this.configSercive.get<string>('ADMIN_USER_PASSWORT'),
-        roles: [Role.Admin, Role.User]  
+        roles: [Role.Admin, Role.User],
+        email: this.configSercive.get<string>('ADMIN_USER_EMAIL')
+
       })
       console.log('admin user successfully created')
       console.log(createdUser);

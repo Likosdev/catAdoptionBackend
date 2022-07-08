@@ -10,20 +10,5 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
       - MONGO_INITDB_DATABASE=catadoption
     container_name: catadoption_mongodb
+    network_mode: bridge
     image: mongo:latest
-  api: 
-    depends_on:
-      - mongo
-    ports: 
-      - '3033:${PORT}'
-    container_name: catadoption_backend
-    image: cat_adoption_backend
-    environment:
-      - NODE_ENV
-      - PORT
-      - MONGODB_USER
-      - MONGODB_PASSWORD
-      - MONGODB_DBNAME
-      - MONGODB_HOST=mongo
-      - JWT_SECRET
-      - ADMIN_USER_EMAIL
