@@ -24,15 +24,12 @@ export class AuthService {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = doc['_doc'];
-      console.log(result);
-
       return result;
     }
     return null;
   }
 
   async login(payload: any) {
-    console.log('payload ist ', payload);
 
     return {
       access_token: this.jwtService.sign(payload),
