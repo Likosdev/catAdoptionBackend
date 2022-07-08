@@ -7,12 +7,14 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Role } from 'src/users/role.enum';
 import { Roles } from 'src/users/roles.decorator';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
 
+@ApiTags('cats')
 @Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
@@ -40,6 +42,7 @@ export class CatsController {
     return this.catsService.update(id, updateCatDto);
   }
 
+  
   @Roles(Role.User)
   @Delete(':id')
   remove(@Param('id') id: string) {

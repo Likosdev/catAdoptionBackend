@@ -16,8 +16,8 @@ services:
       - mongo
     ports: 
       - '3033:${PORT}'
-    container_name: catadoption_backend
-    image: cat_adoption_backend
+    container_name: catadoption_api
+    build: .
     environment:
       - NODE_ENV
       - PORT
