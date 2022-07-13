@@ -4,7 +4,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
 import { Role } from './role.enum';
-import { Roles } from './roles.decorator';
 import { User } from './schema/user.schema';
 import { addUserDto } from './users.dto';
 
