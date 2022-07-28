@@ -18,7 +18,6 @@ export class CreateCatDto {
   breed: string;
 
   @IsString()
-  @IsNotEmpty()
   @ApiProperty()
   shelter: string;
 }

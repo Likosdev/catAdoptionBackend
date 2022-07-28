@@ -6,8 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
+import { response } from 'express';
 import { Role } from 'src/users/role.enum';
 import { Roles } from 'src/users/roles.decorator';
 import { CatsService } from './cats.service';
@@ -48,4 +52,24 @@ export class CatsController {
   remove(@Param('id') id: string) {
     return this.catsService.remove(id);
   }
+
+  @Post(':id/upload')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadImage(@Param('id') id: string, @UploadedFile() file: Express.Multer.File){
+    const response = {
+      originalName: file.originalname,
+      filename: file.filename,
+      cat: {}
+    };
+    const cat = await this.catsService.update(
+      id,
+      {image:file.filename}
+    ).then(cat => {
+      return cat
+    })
+    
+    response.cat = cat;
+    return response;
+  }
+  
 }

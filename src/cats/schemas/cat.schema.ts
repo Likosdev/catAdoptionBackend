@@ -15,6 +15,9 @@ export class Cat {
 
   @Prop()
   shelter: string;
+
+  @Prop()
+  image: string;
 }
 
 export const CatSchema = SchemaFactory.createForClass(Cat);

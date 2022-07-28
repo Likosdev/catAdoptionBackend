@@ -3,6 +3,7 @@ import { CatsService } from './cats.service';
 import { CatsController } from './cats.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Cat, CatSchema } from './schemas/cat.schema';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -12,6 +13,9 @@ import { Cat, CatSchema } from './schemas/cat.schema';
         schema: CatSchema,
       },
     ]),
+    MulterModule.register({
+      dest: './files',
+    }),
   ],
   controllers: [CatsController],
   providers: [CatsService],

@@ -39,3 +39,6 @@ lerna-debug.log*
 
 # Docker Related
 .devcontainer
+
+# Uploads Folder
+/files
