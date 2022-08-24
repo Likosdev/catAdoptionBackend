@@ -52,6 +52,7 @@ export class UsersService implements OnModuleInit {
       );
     }
 
+    // TODO: Throw custom error or less confusting than "BadRequest"
     const existingUser = await this.findUserByName(usersDto.name);
     console.log("found existing user: ", existingUser);
     if (existingUser) {

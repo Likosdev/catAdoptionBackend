@@ -12,8 +12,10 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { response } from 'express';
+import { diskStorage } from 'multer';
 import { Role } from 'src/users/role.enum';
 import { Roles } from 'src/users/roles.decorator';
+import { editFileName, imageFileFilter } from 'src/utils/file-uploading.utils';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -54,17 +56,25 @@ export class CatsController {
   }
 
   @Post(':id/upload')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('file',{
+    storage: diskStorage({
+      destination: './files',
+      filename: editFileName,
+    }),
+    fileFilter: imageFileFilter,
+  }),)
   async uploadImage(@Param('id') id: string, @UploadedFile() file: Express.Multer.File){
     const response = {
       originalName: file.originalname,
       filename: file.filename,
       cat: {}
     };
+
     const cat = await this.catsService.update(
       id,
       {image:file.filename}
     ).then(cat => {
+      console.log("added image to cat: ", cat)
       return cat
     })
     
