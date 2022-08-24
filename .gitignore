@@ -42,3 +42,4 @@ lerna-debug.log*
 
 # Uploads Folder
 /files
+/public/images

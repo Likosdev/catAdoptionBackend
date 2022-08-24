@@ -58,7 +58,7 @@ export class CatsController {
   @Post(':id/upload')
   @UseInterceptors(FileInterceptor('file',{
     storage: diskStorage({
-      destination: './files',
+      destination: './public/images',
       filename: editFileName,
     }),
     fileFilter: imageFileFilter,
@@ -74,7 +74,6 @@ export class CatsController {
       id,
       {image:file.filename}
     ).then(cat => {
-      console.log("added image to cat: ", cat)
       return cat
     })
     

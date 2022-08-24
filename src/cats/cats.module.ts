@@ -14,7 +14,7 @@ import { MulterModule } from '@nestjs/platform-express';
       },
     ]),
     MulterModule.register({
-      dest: './files',
+      dest: '.public/images',
     }),
   ],
   controllers: [CatsController],
