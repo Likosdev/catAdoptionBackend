@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -13,6 +14,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { response } from 'express';
 import { diskStorage } from 'multer';
+import { join } from 'path';
+import { identity, Observable, of } from 'rxjs';
 import { Role } from 'src/users/role.enum';
 import { Roles } from 'src/users/roles.decorator';
 import { editFileName, imageFileFilter } from 'src/utils/file-uploading.utils';
@@ -81,4 +84,17 @@ export class CatsController {
     return response;
   }
   
+  @Get(':id/image')
+  async findCatImage(@Param('id') id, @Res() res) {
+    const filename = await this.catsService.findOne(id).then(cat => {
+      console.log('cat:', cat);
+      return cat.image
+      
+      
+      
+    })
+    console.log(filename);
+    return res.sendFile(join(process.cwd(), 'public/images/' + filename))
+  }
+
 }
