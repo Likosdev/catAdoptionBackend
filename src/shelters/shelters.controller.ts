@@ -29,6 +29,8 @@ export class SheltersController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.User)
   findAll() {
     return this.sheltersService.findAll();
   }
